@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import './App.css';
-
+import SingleCard from './Components/SingleCard';
 const cardImages = [
   { "src": "/img/Array Def.png" },
   { "src": "/img/Array.png" },
@@ -26,7 +26,7 @@ function App() {
 
 
   const shuffleCards = () => {
-    // This is just dpreading the current array and assgin it a variable
+    // This is just spreading the current array and assgin it a variable
     const shuffledCards = [...cardImages]
       // this fires a function to each item in the arrray to randomize
       .sort(() => Math.random() - 0.5)
@@ -45,27 +45,15 @@ function App() {
 
 
     <div className="App">
-      <h1> Magic Match</h1>
+      <h1> Code Tomorrow</h1>
       <button onClick={shuffleCards} >New Game</button>
 
       <div className="card-grid">
-
         {cards.map(card => (
-          <div className="card" key={card.id} >
-            <div>
-              <img className="front" src={card.src} alt="card front" />
-              <img className="back" src="/img/backside.png" alt="card back" />
-
-            </div>
-          </div>
+          <SingleCard key={card.id} card={card} />
         ))}
-
       </div>
-
     </div>
-
-
-
 
   );
 }

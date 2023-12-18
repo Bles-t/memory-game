@@ -1,19 +1,19 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import SingleCard from './Components/SingleCard';
 const cardImages = [
-  { "src": "/img/Array Def.png" },
+  { "src": "/img2/Array.png" },
   { "src": "/img/Array.png" },
-  { "src": "/img/Conditionals Def.png" },
+  { "src": "/img2/Conditionals.png" },
   { "src": "/img/Conditionals.png" },
-  { "src": "/img/Function Def.png" },
+  { "src": "/img2/Function.png" },
   { "src": "/img/Function.png" },
-  { "src": "/img/Loops Def.png" },
+  { "src": "/img2/Loops.png" },
   { "src": "/img/Loops.png" },
-  { "src": "/img/Objects Def.png" },
+  { "src": "/img2/Objects.png" },
   { "src": "/img/Objects.png" },
-  { "src": "/img/Variable Def..png" },
+  { "src": "/img2/Variable.png" },
   { "src": "/img/Variable.png" }
 ]
 
@@ -48,6 +48,17 @@ function App() {
 
     console.log(card);
   }
+
+  // compare 2 selcted cards
+  // Remmber  this fires first when the component mounts
+  // This is saying only if both choices are chose thats whenyou actually fire this function
+  useEffect(() => {
+    if (choiceOne && choiceTwo) {
+      if (choiceOne.src === choiceTwo.src) {
+
+      }
+    }
+  }, [choiceOne, choiceTwo])
 
   console.log(cards, turns);
 

@@ -3,18 +3,18 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import SingleCard from './Components/SingleCard';
 const cardImages = [
-  { "src": "/img2/Array.png" },
-  { "src": "/img/Array.png" },
-  { "src": "/img2/Conditionals.png" },
-  { "src": "/img/Conditionals.png" },
-  { "src": "/img2/Function.png" },
-  { "src": "/img/Function.png" },
-  { "src": "/img2/Loops.png" },
-  { "src": "/img/Loops.png" },
-  { "src": "/img2/Objects.png" },
-  { "src": "/img/Objects.png" },
-  { "src": "/img2/Variable.png" },
-  { "src": "/img/Variable.png" }
+  { "src": "/img2/Array.png", Key: 1 },
+  { "src": "/img/Array.png", Key: 1 },
+  { "src": "/img2/Conditionals.png", Key: 2 },
+  { "src": "/img/Conditionals.png", Key: 2 },
+  { "src": "/img2/Function.png", Key: 3 },
+  { "src": "/img/Function.png", Key: 3 },
+  { "src": "/img2/Loops.png", Key: 4 },
+  { "src": "/img/Loops.png", Key: 4 },
+  { "src": "/img2/Objects.png", Key: 5 },
+  { "src": "/img/Objects.png", Key: 5 },
+  { "src": "/img2/Variable.png", Key: 6 },
+  { "src": "/img/Variable.png", Key: 6 }
 ]
 
 function App() {
@@ -36,12 +36,12 @@ function App() {
       // Taking each item from the new random array
       // and spreading it and it givng it a new random id whil returnig it as a object
       .map((card) => ({ ...card, id: Math.random() }))
-
+    console.log("card image", cardImages);
     setCards(shuffledCards)
     setTurns(0)
 
   }
-
+  console.log("what is this", cards);
   // handle a choice
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
@@ -52,13 +52,28 @@ function App() {
   // compare 2 selcted cards
   // Remmber  this fires first when the component mounts
   // This is saying only if both choices are chose thats whenyou actually fire this function
+  console.log("ChoiceOne", choiceOne);
+
   useEffect(() => {
     if (choiceOne && choiceTwo) {
-      if (choiceOne.src === choiceTwo.src) {
-
+      if (choiceOne.Key === choiceTwo.Key) {
+        console.log('those cards match')
+        resetTurn()
+      } else {
+        console.log('Those cards do not match');
+        resetTurn()
       }
     }
   }, [choiceOne, choiceTwo])
+
+  // reset choices& increase turn
+  const resetTurn = () => {
+    setChoiceOne(null)
+    setChoiceTwo(null)
+    setTurns(prevTurns => prevTurns + 1)
+  }
+
+
 
   console.log(cards, turns);
 

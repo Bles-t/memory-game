@@ -4,7 +4,6 @@ function SingleCard({ card, handleChoice }) {
 
   const handleClick = () => {
     handleChoice(card)
-
   }
 
   return (

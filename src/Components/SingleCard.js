@@ -1,12 +1,18 @@
+import "./SingleCard.css"
 
+function SingleCard({ card, handleChoice }) {
 
-function SingleCard({card}) {
+  const handleClick = () => {
+    handleChoice(card)
+
+  }
 
   return (
     <div className="card" >
       <div>
         <img className="front" src={card.src} alt="card front" />
-        <img className="back" src="/img/backside.png" alt="card back" />
+
+        <img className="back" src="/img/backside.png" onClick={handleClick} alt="card back" />
       </div>
     </div>
   );

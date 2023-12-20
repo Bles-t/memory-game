@@ -58,8 +58,10 @@ function App() {
     if (choiceOne && choiceTwo) {
       if (choiceOne.Key === choiceTwo.Key) {
         setCards(prevCards => {
+
           return prevCards.map(card => {
-            if (card.Key === choiceOne) {
+
+            if (card.Key === choiceOne.Key) {
               return { ...card, matches: true }
               // (matches === true)
             } else {

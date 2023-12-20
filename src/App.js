@@ -36,7 +36,6 @@ function App() {
       // Taking each item from the new random array
       // and spreading it and it givng it a new random id whil returnig it as a object
       .map((card) => ({ ...card, id: Math.random() }))
-    console.log("card image", cardImages);
     setCards(shuffledCards)
     setTurns(0)
 
@@ -78,7 +77,7 @@ function App() {
     }
   }, [choiceOne, choiceTwo])
 
-  console.log(cards);
+
 
   // reset choices& increase turn
   const resetTurn = () => {
@@ -99,7 +98,7 @@ function App() {
 
       <div className="card-grid">
         {cards.map(card => (
-          <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card === choiceOne || card === choiceTwo || card.matched} />
+          <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped ={card === choiceOne || card === choiceTwo || card.matches} />
         ))}
       </div>
     </div>

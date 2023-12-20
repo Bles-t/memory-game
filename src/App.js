@@ -3,18 +3,18 @@ import { useEffect, useState } from 'react';
 import './App.css';
 import SingleCard from './Components/SingleCard';
 const cardImages = [
-  { "src": "/img2/Array.png", Key: 1 },
-  { "src": "/img/Array.png", Key: 1 },
-  { "src": "/img2/Conditionals.png", Key: 2 },
-  { "src": "/img/Conditionals.png", Key: 2 },
-  { "src": "/img2/Function.png", Key: 3 },
-  { "src": "/img/Function.png", Key: 3 },
-  { "src": "/img2/Loops.png", Key: 4 },
-  { "src": "/img/Loops.png", Key: 4 },
-  { "src": "/img2/Objects.png", Key: 5 },
-  { "src": "/img/Objects.png", Key: 5 },
-  { "src": "/img2/Variable.png", Key: 6 },
-  { "src": "/img/Variable.png", Key: 6 }
+  { "src": "/img2/Array.png", matches: false, Key: 1 },
+  { "src": "/img/Array.png", matches: false, Key: 1 },
+  { "src": "/img2/Conditionals.png", matches: false, Key: 2 },
+  { "src": "/img/Conditionals.png", matches: false, Key: 2 },
+  { "src": "/img2/Function.png", matches: false, Key: 3 },
+  { "src": "/img/Function.png", matches: false, Key: 3 },
+  { "src": "/img2/Loops.png", matches: false, Key: 4 },
+  { "src": "/img/Loops.png", matches: false, Key: 4 },
+  { "src": "/img2/Objects.png", matches: false, Key: 5 },
+  { "src": "/img/Objects.png", matches: false, Key: 5 },
+  { "src": "/img2/Variable.png", matches: false, Key: 6 },
+  { "src": "/img/Variable.png", matches: false, Key: 6 }
 ]
 
 function App() {
@@ -41,23 +41,33 @@ function App() {
     setTurns(0)
 
   }
-  console.log("what is this", cards);
+
   // handle a choice
   const handleChoice = (card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
 
-    console.log(card);
+
   }
 
   // compare 2 selcted cards
   // Remmber  this fires first when the component mounts
   // This is saying only if both choices are chose thats whenyou actually fire this function
-  console.log("ChoiceOne", choiceOne);
+
 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
       if (choiceOne.Key === choiceTwo.Key) {
-        console.log('those cards match')
+        setCards(prevCards => {
+          return prevCards.map(card => {
+            if (card.Key === choiceOne) {
+              return { ...card, matches: true }
+              // (matches === true)
+            } else {
+              return card
+            }
+          })
+        })
+        console.log('those cards match');
         resetTurn()
       } else {
         console.log('Those cards do not match');
@@ -65,6 +75,8 @@ function App() {
       }
     }
   }, [choiceOne, choiceTwo])
+
+  console.log(cards);
 
   // reset choices& increase turn
   const resetTurn = () => {
@@ -85,7 +97,7 @@ function App() {
 
       <div className="card-grid">
         {cards.map(card => (
-          <SingleCard key={card.id} card={card} handleChoice={handleChoice} />
+          <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card === choiceOne || card === choiceTwo || card.matched} />
         ))}
       </div>
     </div>

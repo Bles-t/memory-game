@@ -25,7 +25,7 @@ function App() {
   //Storing the choices a user makes into a state
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
-
+  const [disabled, setDisabled] = useState(false)
 
 
   const shuffleCards = () => {
@@ -55,6 +55,7 @@ function App() {
 
   useEffect(() => {
     if (choiceOne && choiceTwo) {
+      setDisabled(true)
       if (choiceOne.Key === choiceTwo.Key) {
         setCards(prevCards => {
 
@@ -85,6 +86,7 @@ function App() {
     setChoiceOne(null)
     setChoiceTwo(null)
     setTurns(prevTurns => prevTurns + 1)
+    setDisabled(false)
   }
 
 
@@ -99,7 +101,7 @@ function App() {
 
       <div className="card-grid">
         {cards.map(card => (
-          <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card === choiceOne || card === choiceTwo || card.matches} />
+          <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card === choiceOne || card === choiceTwo || card.matches} disabled={disabled} />
         ))}
       </div>
     </div>

@@ -72,7 +72,8 @@ function App() {
         resetTurn()
       } else {
         console.log('Those cards do not match');
-        resetTurn()
+        // setimes is a delayed option
+        setTimeout(() => resetTurn(), 1000)
       }
     }
   }, [choiceOne, choiceTwo])
@@ -98,7 +99,7 @@ function App() {
 
       <div className="card-grid">
         {cards.map(card => (
-          <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped ={card === choiceOne || card === choiceTwo || card.matches} />
+          <SingleCard key={card.id} card={card} handleChoice={handleChoice} flipped={card === choiceOne || card === choiceTwo || card.matches} />
         ))}
       </div>
     </div>
